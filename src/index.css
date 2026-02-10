@@ -1,0 +1,248 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 98%;
+    --foreground: 220 20% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 20% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 20% 15%;
+
+    --primary: 348 83% 65%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 168 50% 45%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 30 30% 96%;
+    --muted-foreground: 220 10% 45%;
+
+    --accent: 35 100% 55%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 15% 90%;
+    --input: 220 15% 90%;
+    --ring: 348 83% 65%;
+
+    --radius: 0.5rem;
+
+    /* Custom brand colors */
+    --coral: 348 83% 65%;
+    --coral-light: 348 83% 92%;
+    --mint: 168 50% 45%;
+    --mint-light: 168 40% 92%;
+    --cream: 35 40% 95%;
+    --navy: 220 50% 20%;
+    --gold: 45 90% 50%;
+    --sale-red: 0 85% 55%;
+    --deal-orange: 25 95% 50%;
+
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(348 83% 92%) 0%, hsl(168 40% 92%) 50%, hsl(35 40% 95%) 100%);
+    --gradient-promo: linear-gradient(90deg, hsl(348 83% 65%) 0%, hsl(320 70% 60%) 100%);
+    --gradient-mint: linear-gradient(135deg, hsl(168 50% 45%) 0%, hsl(180 45% 50%) 100%);
+    --gradient-deal: linear-gradient(135deg, hsl(25 95% 50%) 0%, hsl(45 90% 50%) 100%);
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 220 20% 10%;
+    --foreground: 0 0% 95%;
+
+    --card: 220 20% 13%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 220 20% 13%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 348 83% 65%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 168 50% 45%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 220 20% 18%;
+    --muted-foreground: 220 10% 60%;
+
+    --accent: 35 100% 55%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 20% 20%;
+    --input: 220 20% 20%;
+    --ring: 348 83% 65%;
+
+    --sidebar-background: 220 20% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 348 83% 65%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 20% 15%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 220 20% 20%;
+    --sidebar-ring: 348 83% 65%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: "Google Sans Flex", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-optical-sizing: auto;
+  }
+
+  /* Remove orange/blue highlight on buttons and links */
+  button,
+  a,
+  input,
+  select,
+  textarea {
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+  }
+
+  button:focus,
+  a:focus,
+  input:focus,
+  select:focus,
+  textarea:focus {
+    outline: none;
+  }
+
+  button:active,
+  a:active {
+    background-color: transparent !important;
+  }
+}
+
+@layer components {
+  .sale-badge {
+    @apply inline-flex items-center justify-center px-2 py-0.5 text-xs font-bold rounded;
+    background: hsl(var(--sale-red));
+    color: white;
+  }
+
+  .deal-badge {
+    @apply inline-flex items-center justify-center px-2 py-0.5 text-xs font-bold rounded;
+    background: linear-gradient(135deg, hsl(var(--deal-orange)) 0%, hsl(var(--gold)) 100%);
+    color: white;
+  }
+
+  .promo-banner {
+    background: var(--gradient-promo);
+    @apply text-white;
+  }
+
+  .category-card {
+    @apply bg-card rounded-lg p-4 hover:shadow-lg transition-all duration-300 cursor-pointer border border-border;
+  }
+
+  .product-card {
+    @apply bg-card rounded-lg overflow-hidden hover:shadow-xl transition-all duration-300 cursor-pointer border border-border;
+  }
+
+  .product-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .nav-link {
+    @apply text-sm font-medium text-foreground/80 hover:text-primary transition-colors px-3 py-2 rounded-md hover:bg-muted;
+  }
+
+  .section-title {
+    @apply text-xl md:text-2xl font-semibold text-foreground;
+  }
+
+  .price-original {
+    @apply text-muted-foreground line-through text-sm;
+  }
+
+  .price-sale {
+    @apply text-primary font-semibold text-lg;
+  }
+
+  /* Product Description Styles */
+  .prose {
+    @apply text-foreground;
+  }
+  
+  .prose p {
+    @apply mb-2 leading-relaxed;
+  }
+  
+  .prose ul, .prose ol {
+    @apply mb-2 ml-4;
+  }
+  
+  .prose li {
+    @apply mb-1;
+  }
+  
+  .prose h1, .prose h2, .prose h3, .prose h4 {
+    @apply font-semibold mt-3 mb-2;
+  }
+  
+  .prose strong {
+    @apply font-semibold;
+  }
+  
+  .prose a {
+    @apply text-primary hover:underline;
+  }
+}
+
+@layer utilities {
+  .text-gradient-coral {
+    background: var(--gradient-promo);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .bg-gradient-hero {
+    background: var(--gradient-hero);
+  }
+
+  .bg-gradient-promo {
+    background: var(--gradient-promo);
+  }
+
+  .bg-gradient-mint {
+    background: var(--gradient-mint);
+  }
+
+  .bg-gradient-deal {
+    background: var(--gradient-deal);
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
