@@ -553,9 +553,7 @@ export async function removeFromWishlist(userId: string, productId: string): Pro
  * Check if product is in wishlist
  */
 export async function isInWishlist(userId: string, productId: string): Promise<boolean> {
-  if (!supabase) return false;
-
-  try {
+  if (!supabase) return false;  try {
     const { data, error } = await supabase
       .from('wishlist_items')
       .select('id')
