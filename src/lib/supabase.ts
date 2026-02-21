@@ -107,6 +107,8 @@ export const supabase = supabaseUrl && supabaseAnonKey
 export interface WaitlistSignup {
   id?: string;
   created_at?: string;
+  first_name: string;
+  last_name: string;
   phone_number: string;
   box_type: 'general' | 'explore' | 'glow' | 'custom';
   formatted_phone?: string;
@@ -129,6 +131,8 @@ export async function submitToWaitlist(data: WaitlistSignup): Promise<{ success:
       .from('waitlist_signups')
       .insert([
         {
+          first_name: data.first_name,
+          last_name: data.last_name,
           phone_number: data.phone_number,
           box_type: data.box_type,
           formatted_phone: data.formatted_phone,

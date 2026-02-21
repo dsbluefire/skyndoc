@@ -7,6 +7,8 @@ import { Check, Phone } from "lucide-react";
 import { submitToWaitlist } from "@/lib/supabase";
 
 const Waitlist = () => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [countryCode, setCountryCode] = useState("+1");
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -28,6 +30,15 @@ const Waitlist = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
+    if (!firstName || !lastName) {
+      toast({
+        title: "Name required",
+        description: "Please enter your first and last name",
+        variant: "destructive",
+      });
+      return;
+    }
+
     if (!phoneNumber || phoneNumber.length < 10) {
       toast({
         title: "Invalid phone number",
@@ -39,6 +50,8 @@ const Waitlist = () => {
 
     // Submit to Supabase backend
     const result = await submitToWaitlist({
+      first_name: firstName,
+      last_name: lastName,
       phone_number: phoneNumber,
       box_type: 'general',
       formatted_phone: `${countryCode} ${phoneNumber}`,
@@ -89,36 +102,56 @@ const Waitlist = () => {
 
             {/* Waitlist Form */}
             {!isSubmitted ? (
-              <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-lg">
-                <div className="flex-1 relative">
-                  <select
-                    value={countryCode}
-                    onChange={(e) => setCountryCode(e.target.value)}
-                    className="absolute left-4 top-1/2 -translate-y-1/2 bg-transparent text-white border-none outline-none cursor-pointer text-base font-medium"
-                    style={{ width: '70px' }}
-                  >
-                    {countryCodes.map((country) => (
-                      <option key={country.code} value={country.code} className="bg-gray-900 text-white">
-                        {country.flag} {country.code}
-                      </option>
-                    ))}
-                  </select>
+              <form onSubmit={handleSubmit} className="space-y-3 max-w-lg">
+                <div className="flex gap-3">
                   <Input
-                    type="tel"
-                    placeholder="Phone number"
-                    value={phoneNumber}
-                    onChange={(e) => setPhoneNumber(e.target.value)}
-                    className="h-12 pl-24 bg-black border-black rounded-2xl text-base text-white placeholder:text-gray-400 focus:ring-0 focus:ring-offset-0 focus:border-black focus-visible:ring-0 focus-visible:ring-offset-0"
+                    type="text"
+                    placeholder="First name"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                    className="h-12 bg-black border-black rounded-2xl text-base text-white placeholder:text-gray-400 focus:ring-0 focus:ring-offset-0 focus:border-black focus-visible:ring-0 focus-visible:ring-offset-0"
+                    required
+                  />
+                  <Input
+                    type="text"
+                    placeholder="Last name"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                    className="h-12 bg-black border-black rounded-2xl text-base text-white placeholder:text-gray-400 focus:ring-0 focus:ring-offset-0 focus:border-black focus-visible:ring-0 focus-visible:ring-offset-0"
                     required
                   />
                 </div>
-                <Button
-                  type="submit"
-                  size="lg"
-                  className="h-12 px-8 bg-black hover:bg-gray-900 text-white rounded-2xl font-medium w-full sm:w-auto"
-                >
-                  Join Waitlist
-                </Button>
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <div className="flex-1 relative">
+                    <select
+                      value={countryCode}
+                      onChange={(e) => setCountryCode(e.target.value)}
+                      className="absolute left-4 top-1/2 -translate-y-1/2 bg-transparent text-white border-none outline-none cursor-pointer text-base font-medium"
+                      style={{ width: '70px' }}
+                    >
+                      {countryCodes.map((country) => (
+                        <option key={country.code} value={country.code} className="bg-gray-900 text-white">
+                          {country.flag} {country.code}
+                        </option>
+                      ))}
+                    </select>
+                    <Input
+                      type="tel"
+                      placeholder="Phone number"
+                      value={phoneNumber}
+                      onChange={(e) => setPhoneNumber(e.target.value)}
+                      className="h-12 pl-24 bg-black border-black rounded-2xl text-base text-white placeholder:text-gray-400 focus:ring-0 focus:ring-offset-0 focus:border-black focus-visible:ring-0 focus-visible:ring-offset-0"
+                      required
+                    />
+                  </div>
+                  <Button
+                    type="submit"
+                    size="lg"
+                    className="h-12 px-8 bg-black hover:bg-gray-900 text-white rounded-2xl font-medium w-full sm:w-auto"
+                  >
+                    Join Waitlist
+                  </Button>
+                </div>
               </form>
             ) : (
               <div className="flex items-center gap-3 p-6 bg-green-50 border border-green-200 rounded-lg max-w-lg">
