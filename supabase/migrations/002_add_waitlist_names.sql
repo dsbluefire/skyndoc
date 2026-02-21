@@ -45,12 +45,16 @@ CREATE INDEX IF NOT EXISTS idx_waitlist_signups_box_type ON public.waitlist_sign
 -- Enable Row Level Security
 ALTER TABLE public.waitlist_signups ENABLE ROW LEVEL SECURITY;
 
+-- Drop existing policies if they exist
+DROP POLICY IF EXISTS "Anyone can insert into waitlist" ON public.waitlist_signups;
+DROP POLICY IF EXISTS "Authenticated users can view waitlist" ON public.waitlist_signups;
+
 -- RLS Policy - Anyone can insert into waitlist (public signup)
-CREATE POLICY IF NOT EXISTS "Anyone can insert into waitlist"
+CREATE POLICY "Anyone can insert into waitlist"
   ON public.waitlist_signups FOR INSERT
   WITH CHECK (true);
 
 -- RLS Policy - Only authenticated users can view waitlist (admin access)
-CREATE POLICY IF NOT EXISTS "Authenticated users can view waitlist"
+CREATE POLICY "Authenticated users can view waitlist"
   ON public.waitlist_signups FOR SELECT
   USING (auth.role() = 'authenticated');
