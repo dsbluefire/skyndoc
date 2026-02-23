@@ -117,10 +117,6 @@ const Waitlist = () => {
                 >
                   Continue
                 </Button>
-                
-                <p className="text-xs md:text-sm text-gray-600 text-center">
-                  By continuing, you agree to join our waitlist
-                </p>
               </div>
             </div>
           </div>
