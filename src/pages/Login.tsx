@@ -37,10 +37,10 @@ export default function Login() {
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4 py-12" style={{
-      backgroundColor: '#2563eb',
-      backgroundImage: 'radial-gradient(circle, white 160px, transparent 160px)',
-      backgroundSize: '320px 320px',
-      backgroundPosition: 'center center'
+      backgroundImage: 'url(/background.jpg)',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center center',
+      backgroundRepeat: 'no-repeat'
     }}>
       <div className="w-full max-w-md bg-white rounded-3xl shadow-2xl p-6">
         {/* Logo */}
