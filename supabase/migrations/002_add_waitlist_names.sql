@@ -37,6 +37,10 @@ WHERE first_name IS NULL;
 ALTER TABLE public.waitlist_signups 
   ALTER COLUMN first_name SET NOT NULL;
 
+-- Make sure last_name is optional (drop NOT NULL if it exists)
+ALTER TABLE public.waitlist_signups 
+  ALTER COLUMN last_name DROP NOT NULL;
+
 -- Create index for better performance
 CREATE INDEX IF NOT EXISTS idx_waitlist_signups_phone ON public.waitlist_signups(phone_number);
 CREATE INDEX IF NOT EXISTS idx_waitlist_signups_box_type ON public.waitlist_signups(box_type);
