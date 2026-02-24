@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS public.waitlist_signups (
   id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
   created_at TIMESTAMPTZ DEFAULT NOW(),
   first_name TEXT NOT NULL,
-  last_name TEXT NOT NULL,
+  last_name TEXT,
   phone_number TEXT NOT NULL,
   formatted_phone TEXT,
   country_code TEXT DEFAULT '+1',
@@ -28,15 +28,14 @@ BEGIN
   END;
 END $$;
 
--- Update existing records to have empty strings if they don't have names
+-- Update existing records to have empty strings if they don't have first_name
 UPDATE public.waitlist_signups 
-SET first_name = '', last_name = ''
-WHERE first_name IS NULL OR last_name IS NULL;
+SET first_name = ''
+WHERE first_name IS NULL;
 
--- Make columns NOT NULL after updating
+-- Make only first_name NOT NULL
 ALTER TABLE public.waitlist_signups 
-  ALTER COLUMN first_name SET NOT NULL,
-  ALTER COLUMN last_name SET NOT NULL;
+  ALTER COLUMN first_name SET NOT NULL;
 
 -- Create index for better performance
 CREATE INDEX IF NOT EXISTS idx_waitlist_signups_phone ON public.waitlist_signups(phone_number);

@@ -8,7 +8,6 @@ import { submitToWaitlist } from "@/lib/supabase";
 
 const Waitlist = () => {
   const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [countryCode, setCountryCode] = useState("+1");
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -31,10 +30,10 @@ const Waitlist = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!firstName || !lastName) {
+    if (!firstName) {
       toast({
         title: "Name required",
-        description: "Please enter your first and last name",
+        description: "Please enter your first name",
         variant: "destructive",
       });
       return;
@@ -52,7 +51,6 @@ const Waitlist = () => {
     // Submit to Supabase backend
     const result = await submitToWaitlist({
       first_name: firstName,
-      last_name: lastName,
       phone_number: phoneNumber,
       box_type: 'general',
       formatted_phone: `${countryCode} ${phoneNumber}`,
@@ -164,24 +162,14 @@ const Waitlist = () => {
             {/* Waitlist Form */}
             {!isSubmitted ? (
               <form onSubmit={handleSubmit} className="space-y-3 max-w-lg">
-                <div className="flex gap-3">
-                  <Input
-                    type="text"
-                    placeholder="First name"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
-                    className="h-12 bg-black border-black rounded-2xl text-base text-white placeholder:text-gray-400 focus:ring-0 focus:ring-offset-0 focus:border-black focus-visible:ring-0 focus-visible:ring-offset-0"
-                    required
-                  />
-                  <Input
-                    type="text"
-                    placeholder="Last name"
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
-                    className="h-12 bg-black border-black rounded-2xl text-base text-white placeholder:text-gray-400 focus:ring-0 focus:ring-offset-0 focus:border-black focus-visible:ring-0 focus-visible:ring-offset-0"
-                    required
-                  />
-                </div>
+                <Input
+                  type="text"
+                  placeholder="First name"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  className="h-12 bg-black border-black rounded-2xl text-base text-white placeholder:text-gray-400 focus:ring-0 focus:ring-offset-0 focus:border-black focus-visible:ring-0 focus-visible:ring-offset-0"
+                  required
+                />
                 <div className="flex flex-col sm:flex-row gap-3">
                   <div className="flex-1 relative">
                     <select
