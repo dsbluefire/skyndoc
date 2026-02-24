@@ -149,6 +149,18 @@ const WaitlistCustom = () => {
               </p>
             </div>
 
+            {/* Social Proof Badge */}
+            <div className="flex items-center gap-2 bg-green-50 border border-green-200 rounded-full px-4 py-2 max-w-fit">
+              <div className="flex -space-x-2">
+                <div className="w-6 h-6 rounded-full bg-green-500"></div>
+                <div className="w-6 h-6 rounded-full bg-green-400"></div>
+                <div className="w-6 h-6 rounded-full bg-green-600"></div>
+              </div>
+              <p className="text-sm text-gray-700 font-medium">
+                48 people signed up in the past hour
+              </p>
+            </div>
+
             {/* Waitlist Form */}
             {!isSubmitted ? (
               <form onSubmit={handleSubmit} className="space-y-3 max-w-lg">
