@@ -173,7 +173,7 @@ const WaitlistExplore = () => {
           <footer className="pt-8 md:pt-12 text-xs md:text-sm text-gray-500 bg-white" style={{ fontFamily: "Helvetica, Arial, sans-serif" }}>
             <p>© 2026 - Skyndoc Inc. - Save money on skincare and find items that work.</p>
             <p className="mt-1">
-              Built in New York. Built by Brown University alumni.
+              Built in New York.
             </p>
           </footer>
         </div>
