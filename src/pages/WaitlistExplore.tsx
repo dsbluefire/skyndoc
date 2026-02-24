@@ -11,7 +11,6 @@ const WaitlistExplore = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [countryCode, setCountryCode] = useState("+1");
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [showPromoModal, setShowPromoModal] = useState(true);
   const { toast } = useToast();
 
   const countryCodes = [
@@ -73,54 +72,6 @@ const WaitlistExplore = () => {
   };
 
   return (
-    <>
-      {/* Promotional Modal */}
-      {showPromoModal && (
-        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-2xl md:rounded-3xl max-w-md md:max-w-2xl w-full relative shadow-2xl overflow-hidden">
-            <button
-              onClick={() => setShowPromoModal(false)}
-              className="absolute top-3 right-3 md:top-4 md:right-4 text-black hover:text-gray-700 transition-colors z-10"
-              aria-label="Close"
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-            
-            <div className="flex flex-col">
-              {/* Top - Image */}
-              <div className="h-48 md:h-64 bg-white">
-                <img 
-                  src="/popup.jpg" 
-                  alt="Promotional offer" 
-                  className="w-full h-full object-contain"
-                />
-              </div>
-              
-              {/* Bottom - Content */}
-              <div className="p-6 md:p-10 flex flex-col justify-center space-y-6 md:space-y-8">
-                <div className="space-y-3 md:space-y-4 text-center">
-                  <h2 className="text-3xl md:text-4xl text-black leading-tight uppercase">
-                    Get a bonus item
-                  </h2>
-                  <p className="text-base md:text-lg text-gray-800">
-                    When you join the waitlist today.
-                  </p>
-                </div>
-                
-                <Button
-                  onClick={() => setShowPromoModal(false)}
-                  className="w-full h-14 md:h-16 bg-black hover:bg-gray-800 text-white text-base md:text-lg font-bold uppercase tracking-wider shadow-xl"
-                >
-                  Continue
-                </Button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-
     <div className="min-h-screen flex flex-col md:flex-row">
       {/* Main Content */}
       <main className="flex-1 grid md:grid-cols-2 w-full">
@@ -239,7 +190,6 @@ const WaitlistExplore = () => {
         </div>
       </main>
     </div>
-    </>
   );
 };
 
